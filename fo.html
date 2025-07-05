@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faculty Form</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 6px;
+    }
+    table {
+      background-color:wheat;
+    }
+  </style>
+  <script src="script.java"></script>
+</head>
+<body>
+  <table border="1">
+    <tr>
+      <td>
+        <form onsubmit="event.preventDefault(); onFormSubmit();">
+          <h2>Enter Faculty Details</h2>
+
+          <label for="facName">Name:</label><br>
+          <input type="text" id="facName" placeholder="Enter the faculty name"><br><br>
+
+          <label for="CorName">Course:</label><br>
+          <input type="text" id="CorName" placeholder="Enter the course name"><br><br>
+
+          <label for="ColName">College Name:</label><br>
+          <input type="text" id="ColName" placeholder="Enter the college name"><br><br>
+
+          <label for="facDep">Department:</label><br>
+          <input type="text" id="facDep" placeholder="Enter the department"><br><br>
+
+          <label for="facSub">Subject:</label><br>
+          <input type="text" id="facSub" placeholder="Enter the subject"><br><br>
+
+          <label for="facAge">Age:</label><br>
+          <input type="text" id="facAge" placeholder="Enter the age"><br><br>
+
+          <label for="facPlace">Place:</label><br>
+          <input type="text" id="facPlace" placeholder="Enter the place"><br><br>
+
+          <input type="submit" value="Submit">
+        </form>
+      </td>
+
+      <td>
+        <table id="faclist">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Course</th>
+              <th>College</th>
+              <th>Department</th>
+              <th>Subject</th>
+              <th>Age</th>
+              <th>Place</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
