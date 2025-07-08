@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            function add()
+            {
+                var num1,num2,sum;
+                num1=parseInt(document.getElementById("txtFirstNumber").value);
+                num2=parseInt(document.getElementById("txtSecondNumber").value);
+                sum=num1+num2;
+                document.getElementById("txtAnswer").value=sum;
+            }
+             function subt(){
+                var num1,num2,sub;
+                num1=parseInt(document.getElementById("txtFirstNumber").value)
+                num2=parseInt(document.getElementById("txtSecondNumber").value)
+                subt=num1-num2;
+                document.getElementById("txtAnswer").value=subt;
+             }
+             function mul(){
+                var num1,num2,sub;
+                num1=parseInt(document.getElementById("txtFirstNumber").value)
+                num2=parseInt(document.getElementById("txtSecondNumber").value)
+                mul=num1*num2;
+                document.getElementById("txtAnswer").value=mul;
+             }
+             function divi(){
+                var num1,num2,sub;
+                num1=parseInt(document.getElementById("txtFirstNumber").value)
+                num2=parseInt(document.getElementById("txtSecondNumber").value)
+                divi=num1/num2;
+                document.getElementById("txtAnswer").value=divi;
+             }
+             function perc(){
+                var num1,num2,perc;
+                num1=parseInt(document.getElementById("txtFirstNumber").value)
+                num2=parseInt(document.getElementById("txtSecondNumber").value)
+                perc=num1/num2*100;
+                document.getElementById("txtAnswer").value=perc;
+             }
+             function perc(){
+                var num1,num2,perc;
+                num1=parseInt(document.getElementById("txtFirstNumber").value)
+                num2=parseInt(document.getElementById("txtSecondNumber").value)
+                perc=num1/num2*100;
+                document.getElementById("txtAnswer").value=perc;
+             }
+             function clean(){
+                num1=parseInt(document.getElementById("txtFirstNumber").value="")
+                num2=parseInt(document.getElementById("txtSecondNumber").value="")
+                document.getElementById("txtAnswer").value="";
+             }
+            </script>
+            
+    </head>
+    <body >
+        <p>First Number: <input id="txtFirstNumber"></p>
+        <p>Second Number: <input id="txtSecondNumber"></p>
+        <button onclick="add()">Add Them</button>
+         <button onclick="subt()">Subt Them</button>
+         <button onclick="mul()">Mul Them</button>
+         <button onclick="divi()">Divi Them</button>
+         <button onclick="perc()">percentage Them</button>
+
+         <button onclick="clean()">ClearAll</button>
+         
+        <p>Total=<input id="txtAnswer"></p>
+    </body></html>
