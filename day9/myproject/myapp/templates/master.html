@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <script src="{% static 'js/script1.js' %}"></script>
+</head>
+<body bgcolor="pink"> 
+    <h1 align="center">Welcome to Annamacharya College</h1>
+
+    <div class="navbar">
+        <!-- Employee Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('employeeDropdown')">Employee
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="employeeDropdown">
+                <a href="{% url 'insert_employee' %}">Add data</a>
+                <a href="{% url 'view_employee' %}">View data</a>
+                <a href="#">Update data</a>
+                <a href="#">Search data</a>
+            </div>
+        </div>
+
+        <!-- Student Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('studentDropdown')">Student
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="studentDropdown">
+                <a href="{% url 'insert_student' %}">Add data</a>
+                <a href="{% url 'view_student' %}">View data</a>
+                <a href="#">Update data</a>
+                <a href="#">Search data</a>
+            </div>
+        </div>
+
+        <!-- Faculty Dropdown (already present) -->
+        <div class="dropdown">
+            <button class="dropbtn" onclick="toggleDropdown('facultyDropdown')">Faculty
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="facultyDropdown">
+                <a href="{% url 'insert_faculty' %}">Add data</a>
+                <a href="{% url 'view_faculty' %}">View data</a>
+                <a href="{% url 'view_faculty_delete' %}">Delete data</a>
+                <a href="#">Update data</a>
+                <a href="#">Search data</a>
+            </div>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <p>Author: Praveen</p>
+
+    <script>
+        function toggleDropdown(id) {
+            document.querySelectorAll('.dropdown-content').forEach(function(el) {
+                if (el.id !== id) el.style.display = 'none';
+            });
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Optional: Close dropdowns when clicking outside
+        window.onclick = function(e) {
+            if (!e.target.matches('.dropbtn')) {
+                document.querySelectorAll('.dropdown-content').forEach(function(drop) {
+                    drop.style.display = 'none';
+                });
+            }
+        }
+    </script>
+</body>
+</html>
