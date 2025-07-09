@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+<head>
+<title>friend</title>
+<style>
+h1 {
+  color:Lightgreen;
+}
+h2 { 
+color:Indigo;
+}
+</style>
+</head>
+<body bgcolor=skyblue>
+<marquee behavior=alternate>
+  <h1>Welcome to Tharun page</h1>
+</marquee>
+<h2>This is Tharun</h2>
+<a href="{% url 'home' %}">Back to Home</a>
+<img src="{% static 'img/thar.jpg' %}" width=150px height=100px >
+</body>
+</html>

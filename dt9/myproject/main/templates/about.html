@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+<head><title>About</title>
+<style>
+h1 { 
+       color:blue;
+}
+h2 {
+    color:brown;
+}
+</style>
+</head>
+<body bgcolor='pink'>
+<marquee>
+  <h1>This is My Page</h1>
+</marquee>
+  <h2>This is Sai Sabarish</h2>
+  <a href="{% url 'home' %}">Back to Home</a>
+<img src="{% static 'img/sabarish.jpg' %}" width=150px height=100px>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+<head>
+<title>friend</title>
+<style>
+h1 { 
+   color:purple;
+   }
+h2 {
+   color:green;
+}
+</style>
+</head>
+<body bgcolor=skyblue>
+<marquee behavior=alternate>
+  <h1>Welcome to Arun page</h1>
+</marquee>
+<h2>This is Arun</h2>
+<a href="{% url 'home' %}">Back to Home</a>
+<img src="{% static 'img/aru.jpg' %}" width=150px height=100px >
+</body>
+</html>

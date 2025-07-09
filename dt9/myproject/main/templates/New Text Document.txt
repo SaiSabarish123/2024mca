@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>friend</title>
+</head>
+<body bgcolor=skyblue>
+<marquee behavior=alternate>
+  <h1>Welcome to Yeshwanth page</h1>
+</marquee>
+<div>This is Yeshwanth</div>
+<a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

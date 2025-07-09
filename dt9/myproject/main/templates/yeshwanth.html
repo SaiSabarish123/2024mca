@@ -1,0 +1,21 @@
+{% load static %}
+<head>
+<title>friend</title>
+<style>
+h1 {
+  color:wheat;
+}
+h2 {
+  color:indigo;
+}
+</style>
+</head>
+<body bgcolor=skyblue>
+<marquee behavior=alternate>
+  <h1>Welcome to Yeshwanth page</h1>
+</marquee>
+<h2>This is Yeshwanth</h2>  
+<img src="{% static 'img/yesh.jpg' %}" width=150px height=100px>
+<a href="{% url 'home' %}">Back to Home</a> <br /> 
+</body>
+</html>
