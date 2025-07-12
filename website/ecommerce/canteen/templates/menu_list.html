@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu of Canteen</title>
+    <style>
+        img {
+            max-width: 150px;
+            height: 150px;
+        }
+        .menu {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            background-color: #fff;
+        }
+        .header {
+            font-size: 50px;
+            background-color: skyblue;
+            text-align: center;
+            padding: 20px;
+        }
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body bgcolor="pink">
+    <div class="header">Mother Theresa College Canteen</div>
+    <h1>Menus</h1>
+    <div class="menu-container">
+        {% for menu in menus %}
+            <div class="menu">
+                {% if menu.image %}
+                    <img src="{{ menu.image.url }}" alt="{{ menu.name }}">
+                {% endif %}
+                <h2><a href="{% url 'menu_detail' menu.pk %}">{{ menu.name }}</a></h2>
+                <p>Price: ₹{{ menu.price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
