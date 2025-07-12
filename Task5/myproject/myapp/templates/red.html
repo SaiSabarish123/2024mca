@@ -1,0 +1,9 @@
+
+<html>
+<head>
+    <title>Student Catalog</title>
+<body bgcolor='pink'>
+{% for i in data %}
+    <p><h1>{{i.name}} has scored {{i.marks}}marks</h1></p>
+    {% endfor %}
+
