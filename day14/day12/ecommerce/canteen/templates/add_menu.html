@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Menu Item</title></head>
+<body bgcolor="wheat">
+    <h1>Add New Item</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </form>
+    <a href="{% url 'menu_list' %}">← Back to Menu</a>
+</body>
+</html>

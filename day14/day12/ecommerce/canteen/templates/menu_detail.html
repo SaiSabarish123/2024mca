@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ menu.name }} Details</title></head>
+<body bgcolor="wheat">
+    <h1>{{ menu.name }}</h1>
+    {% if menu.image %}
+        <img src="{{ menu.image.url }}" width="200"><br>
+    {% endif %}
+    <p><b>Category:</b> {{ menu.category.name }}</p>
+    <p>{{ menu.description }}</p>
+    <p><b>Price:</b> ₹{{ menu.price }}</p>
+    <a href="{% url 'add_to_cart' menu.id %}">Add to Cart</a> |
+    <a href="{% url 'menu_list' %}">Back</a>
+</body>
+</html>

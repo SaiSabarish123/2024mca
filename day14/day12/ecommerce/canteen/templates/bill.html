@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form.inline {
+            display: inline;
+        }
+        .action-buttons button {
+            margin: 2px 4px;
+        }
+        #qr-code {
+            margin-top: 30px;
+        }
+        #print-btn {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #clear-cart-btn {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>🧾 Your Bill</h2>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.menu.name }}</td>
+            <td>
+                <form method="post" class="inline">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" required>
+                    <input type="hidden" name="item_id" value="{{ item.menu.id }}">
+                    <button type="submit" name="action" value="update">Update</button>
+                </form>
+            </td>
+            <td>₹{{ item.menu.price }}</td>
+            <td>₹{{ item.subtotal }}</td>
+            <td class="action-buttons">
+                <form method="post" class="inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.menu.id }}">
+                    <button type="submit" name="action" value="delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td colspan="2"><strong>₹{{ total }}</strong></td>
+        </tr>
+    </table>
+
+    <!-- Clear Cart -->
+    <form method="post" style="margin-top: 10px;">
+        {% csrf_token %}
+        <button type="submit" id="clear-cart-btn" name="clear_cart" value="1">🗑️ Clear Cart</button>
+    </form>
+
+    <!-- QR Code -->
+    {% if qr_img %}
+    <div id="qr-code">
+        <h3>📱 Scan QR Code for Bill</h3>
+        <img src="data:image/png;base64,{{ qr_img }}" alt="QR Code">
+    </div>
+    {% endif %}
+
+    <!-- Print Button -->
+    <button id="print-btn" onclick="window.print()">🖨️ Print Bill</button>
+<a href="{% url 'menu_list' %}">
+    <button style="margin-top: 20px; padding: 10px 15px; background-color: #007BFF; color: white; border: none; cursor: pointer;">
+        🔙 Back to Menu
+    </button>
+</a>
+</body>
+</html>

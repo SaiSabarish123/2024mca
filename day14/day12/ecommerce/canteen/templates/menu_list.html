@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canteen Menu</title>
+    <style>
+        body {
+            background-color: wheat;
+            font-family: Arial, sans-serif;
+        }
+        center {
+            font-size: 40px;
+            background-color: skyblue;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            float: left;
+            display: block;
+            text-align: center;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .navbar-right {
+            float: right;
+        }
+        .top-buttons, .cart-info {
+            margin: 15px;
+        }
+        .menu {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 230px;
+            background-color: #fff;
+            border-radius: 10px;
+            vertical-align: top;
+            box-shadow: 2px 2px 5px #aaa;
+        }
+        img {
+            max-width: 100%;
+            height: 150px;
+            border-radius: 6px;
+        }
+        .category-title {
+            background-color: #f4a460;
+            padding: 10px;
+            margin: 20px 15px 10px;
+            border-radius: 10px;
+            font-size: 22px;
+        }
+        .category-items {
+            display: none;
+            padding-left: 20px;
+        }
+        button {
+            padding: 5px 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+        }
+        .delete-button {
+            background-color: #d9534f;
+            margin-top: 5px;
+        }
+        footer {
+            text-align: center;
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 30px;
+            background-color: #f0e68c;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <center>Mother Theresa College Canteen</center
+    <!-- ✅ NAVBAR -->
+    <div class="navbar">
+        <a href="{% url 'menu_list' %}">🏠 Menu</a>
+        <a href="{% url 'view_cart' %}">🛒 View Cart</a>
+        {% if user.is_staff %}
+            <a href="{% url 'add_menu_item' %}">➕ Add Item</a>
+        {% endif %}
+        <div class="navbar-right">
+            <a href="#">👤Login</a>
+        </div>
+    </div><br /> <br />
+    {% with request.session.cart.items|length as cart_count %}
+    {% endwith %}
+
+    <!-- ✅ CATEGORY DROPDOWN -->
+    <div style="margin-left: 20px;">
+        <label for="categorySelect"><strong>Select Category:</strong></label>
+        <select id="categorySelect" onchange="showSelectedCategory()">
+            <option value="all">-- All Categories --</option>
+            {% for category in categories %}
+                <option value="category-{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div> 
+    <!-- ✅ CATEGORY-WISE DISPLAY -->
+    <div id="all-categories">
+        {% for category in categories %}
+            <div class="category-items" id="category-{{ category.id }}">
+                <h3 class="category-title">{{ category.name }}</h3>
+                {% for menu in category.menus.all %}
+                    <div class="menu">
+                        {% if menu.image %}
+                            <img src="{{ menu.image.url }}" alt="{{ menu.name }}">
+                        {% endif %}
+
+                        <h3><a href="{% url 'menu_detail' menu.id %}">{{ menu.name }}</a></h3>
+                        <p>{{ menu.description|truncatewords:15 }}</p>
+                        <p><strong>Price:</strong> ₹{{ menu.price }}</p>
+
+                        <form method="post" action="{% url 'add_to_cart' menu.id %}">
+                            {% csrf_token %}
+                            <label>Qty:</label>
+                            <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
+                            <button type="submit">🛒 Add to Cart</button>
+                        </form>
+                    </div>
+                {% empty %}
+                    <p>No items in this category.</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <footer>Developed by <strong>Sai</strong></footer>
+
+    <!-- ✅ JS TO TOGGLE DISPLAY -->
+    <script>
+        function showSelectedCategory() {
+            const selected = document.getElementById("categorySelect").value;
+            const allSections = document.querySelectorAll(".category-items");
+
+            allSections.forEach(section => {
+                section.style.display = (selected === "all" || section.id === selected) ? "block" : "none";
+            });
+        }
+
+        // Show all by default
+        window.onload = () => {
+            showSelectedCategory();
+        };
+    </script>
+
+</body>
+</html>
