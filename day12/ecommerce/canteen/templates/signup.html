@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .signup-container {
+      width: 380px;
+      margin: 80px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .signup-container label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .signup-container input[type="text"],
+    .signup-container input[type="email"],
+    .signup-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .signup-container input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .signup-container input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    .errorlist {
+      color: red;
+      margin-bottom: 10px;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .login-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="signup-container">
+  <h2>Create Account</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <label for="id_username">Username</label>
+    {{ form.username.errors }}
+    {{ form.username }}
+
+    <label for="id_password1">Password</label>
+    {{ form.password1.errors }}
+    {{ form.password1 }}
+    
+    <label for="id_password2">Confirm Password</label>
+    {{ form.password2.errors }}
+    {{ form.password2 }}
+
+    <input type="submit" value="Sign Up">
+  </form>
+
+  <div class="login-link">
+    Already have an account? <a href="{% url 'login' %}">Login here</a>
+  </div>
+</div>
+
+</body>
+</html>

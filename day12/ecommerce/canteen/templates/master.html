@@ -21,7 +21,7 @@
         }
 
         nav {
-            /* background-color: #007bff; */
+            background-color: #007bff;
             overflow: hidden;
         }
 
@@ -32,8 +32,6 @@
             text-align: center;
             padding: 12px 20px;
             text-decoration: none;
-                        background-color: #0056b3;
-
         }
 
         nav a:hover {
@@ -173,69 +171,23 @@
     </style>
 </head>
 <body>
- 
-<div class="container">
-    <nav>
-    <a href="{% url 'home' %}">Home</a>
-    </nav>
-</div>
-    <!-- ✅ CATEGORY DROPDOWN -->
-    <div style="margin-left: 20px;">
-        <label for="categorySelect"><strong>Select Category:</strong></label>
-        <select id="categorySelect" onchange="showSelectedCategory()">
-            <option value="all">-- All Categories --</option>
-            {% for category in categories %}
-                <option value="category-{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-    </div> 
-    <!-- ✅ CATEGORY-WISE DISPLAY -->
-    <div id="all-categories">
-        {% for category in categories %}
-            <div class="category-items" id="category-{{ category.id }}">
-                <h3 class="category-title">{{ category.name }}</h3>
-                {% for menu in category.menus.all %}
-                    <div class="menu">
-                        {% if menu.image %}
-                            <img src="{{ menu.image.url }}" alt="{{ menu.name }}">
-                        {% endif %}
-
-                        <h3><a href="{% url 'menu_detail' menu.id %}">{{ menu.name }}</a></h3>
-                        <p>{{ menu.description|truncatewords:15 }}</p>
-                        <p><strong>Price:</strong> ₹{{ menu.price }}</p>
-
-                        <form method="post" action="{% url 'add_to_cart' menu.id %}">
-                            {% csrf_token %}
-                            <label>Qty:</label>
-                            <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
-                            <button type="submit">🛒 Add to Cart</button>
-                        </form>
-                    </div>
-                {% empty %}
-                    <p>No items in this category.</p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    </div>
-
-    <footer>Developed by <strong>Sai</strong></footer>
-
-    <!-- ✅ JS TO TOGGLE DISPLAY -->
-    <script>
-        function showSelectedCategory() {
-            const selected = document.getElementById("categorySelect").value;
-            const allSections = document.querySelectorAll(".category-items");
-
-            allSections.forEach(section => {
-                section.style.display = (selected === "all" || section.id === selected) ? "block" : "none";
-            });
-        }
-
-        // Show all by default
-        window.onload = () => {
-            showSelectedCategory();
-        };
-    </script>
+     <nav>
+     <a href="{% url 'home' %}">Home</a>
+     <a href="{% url 'view_cart' %}">🛒 View Cart</a>
+        {% if user.is_staff %}
+            <a href="{% url 'add_menu_item' %}">➕ Add Item</a>
+        {% endif %}
+        <div class="navbar-right">
+  {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+  {% else %}
+    <a href="{% url 'sa' %}">Login</a>
+  {% endif %}
+    </div><br /> <br />
+</nav>
 
 </body>
 </html>
+
+{% block content %}
+    {% endblock %}

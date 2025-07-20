@@ -4,4 +4,4 @@ from .models import Menu
 class MenuForm(forms.ModelForm):
     class Meta:
         model = Menu
-        fields = ['name', 'description', 'price', 'category', 'image']
+        fields = ['category', 'name', 'description', 'price', 'image']
